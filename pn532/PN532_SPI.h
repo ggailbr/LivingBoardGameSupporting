@@ -12,8 +12,14 @@
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
 #include "hardware/spi.h"
-#include "player_main.h"
 #include "PN532.h"
+
+
+#define SPI0 spi0
+#define SPI0_SCK    2
+#define SPI0_MOSI   3
+#define SPI0_MISO   4
+#define SPI0_BAUD   2000000
 
 #define STATUS_READ 2
 #define DATA_WRITE  1

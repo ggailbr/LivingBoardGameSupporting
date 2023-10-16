@@ -20,5 +20,4 @@ typedef struct{
     uint8_t last;
 } message_pramble;
 
-
 #endif

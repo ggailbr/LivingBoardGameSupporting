@@ -3,7 +3,6 @@
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
 #include "hardware/spi.h"
-#include "player_main.h"
 #include "PN532.h"
 #include "PN532_SPI.h"
 
