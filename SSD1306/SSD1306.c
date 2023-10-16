@@ -138,6 +138,32 @@ void draw_character_ui(i2c_inst_t *i2c){
     }
 }
 
+void display_error(i2c_inst_t *i2c, uint8_t *string, uint8_t len){
+    clear_display(i2c);
+    // Set to Horizontal Addressing
+    cmd_buf[1] = 0x20;
+    cmd_buf[2] = 0x00;
+    i2c_write_blocking(i2c, SSD1306_ADDR, cmd_buf, 3, false);
+    // Set from PAGE0-7
+    cmd_buf[1] = 0x22;
+    cmd_buf[2] = 0x03;
+    cmd_buf[3] = 0x05;
+    // Set from COLUMN 14*6->14*6+4
+    cmd_buf[1] = 0x21;
+    cmd_buf[2] = 0x00;
+    cmd_buf[3] = 0x7F;
+    for(uint8_t j = 0; j < len; j++){
+        for(uint8_t k = 0; k < CHARS_COLS_LENGTH; k++){
+            if(string[k] - 0x20 >= 0){
+                text_buff[k+1] = FONTS[string[k] - 0x20][k];
+            }
+            else{
+                text_buff[k+1] = 0x00;
+            }
+        }
+        i2c_write_blocking(i2c, SSD1306_ADDR, text_buff, 7, false);
+    }
+}
 
 void draw_image(i2c_inst_t *i2c, uint8_t *image, bool full_screen){
     // Set to Horizontal Addressing

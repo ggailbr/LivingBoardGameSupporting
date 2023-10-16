@@ -20,4 +20,21 @@ typedef struct{
     uint8_t last;
 } message_pramble;
 
+typedef struct{
+    message_pramble preamble;
+    uint8_t text_line[8][14];
+    uint8_t reserved[44];
+    union{
+        struct{
+            uint8_t figurine_spacer[104];
+            uint8_t portrait[240];
+        };
+        struct{
+            uint8_t full_image[320];
+            uint8_t equipment_image[24];
+        };
+    };
+} NTAG215;
+
+
 #endif

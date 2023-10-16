@@ -111,5 +111,6 @@ void draw_equip(i2c_inst_t *i2c,  uint8_t equipments[3][24], uint8_t occupied_sp
 // Sets up the display and clears it
 void SSD1306_init(i2c_inst_t *i2c);
 uint8_t write_text(i2c_inst_t *i2c);
+void display_error(i2c_inst_t *i2c, uint8_t *string, uint8_t len);
 
   #endif
