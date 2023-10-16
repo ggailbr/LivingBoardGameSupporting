@@ -105,6 +105,10 @@ void clear_display(i2c_inst_t *i2c){
     // Set to Page Addressing
     cmd_buf[1] = 0x20;
     cmd_buf[2] = 0x02;
+    // Set from COLUMN 14*6->14*6+4
+    cmd_buf[1] = 0x21;
+    cmd_buf[2] = 0x00;
+    cmd_buf[3] = 0x7F;
     i2c_write_blocking(i2c, SSD1306_ADDR, cmd_buf, 3, false);
     for(uint8_t i = 0; i < 8; i++){
         // Setting the Page to i
