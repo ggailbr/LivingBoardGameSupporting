@@ -21,6 +21,7 @@ typedef struct{
 } message_pramble;
 
 typedef struct{
+    uint8_t uid[7];
     message_pramble preamble;
     uint8_t text_line[8][14];
     uint8_t reserved[44];

@@ -55,10 +55,6 @@ uint8_t write_text(i2c_inst_t *i2c){
     cmd_buf[2] = 0x00;
     cmd_buf[3] = 0x7F;
     i2c_write_blocking(i2c, SSD1306_ADDR, cmd_buf, 4, false);
-    // // Set to Column Start
-    // cmd_buf[1] = 0x00;
-    // cmd_buf[2] = 0x10;
-    // i2c_write_blocking(i2c, SSD1306_ADDR, cmd_buf, 3, false);
     for(uint8_t i = 0; i < 8; i++){
         //Setting the Page to i
         cmd_buf[1] = 0xB0 | i;
@@ -105,11 +101,17 @@ void clear_display(i2c_inst_t *i2c){
     // Set to Page Addressing
     cmd_buf[1] = 0x20;
     cmd_buf[2] = 0x02;
-    // Set from COLUMN 14*6->14*6+4
+    i2c_write_blocking(i2c, SSD1306_ADDR, cmd_buf, 3, false);
+    // Set from all Columns
     cmd_buf[1] = 0x21;
     cmd_buf[2] = 0x00;
     cmd_buf[3] = 0x7F;
-    i2c_write_blocking(i2c, SSD1306_ADDR, cmd_buf, 3, false);
+    i2c_write_blocking(i2c, SSD1306_ADDR, cmd_buf, 4, false);
+    // Set from PAGE0-7
+    cmd_buf[1] = 0x22;
+    cmd_buf[2] = 0x00;
+    cmd_buf[3] = 0x07;
+    i2c_write_blocking(i2c, SSD1306_ADDR, cmd_buf, 4, false);
     for(uint8_t i = 0; i < 8; i++){
         // Setting the Page to i
         cmd_buf[1] = 0xB0 | i;
@@ -152,14 +154,16 @@ void display_error(i2c_inst_t *i2c, uint8_t *string, uint8_t len){
     cmd_buf[1] = 0x22;
     cmd_buf[2] = 0x03;
     cmd_buf[3] = 0x05;
+    i2c_write_blocking(i2c, SSD1306_ADDR, cmd_buf, 4, false);
     // Set from COLUMN 14*6->14*6+4
     cmd_buf[1] = 0x21;
     cmd_buf[2] = 0x00;
     cmd_buf[3] = 0x7F;
+    i2c_write_blocking(i2c, SSD1306_ADDR, cmd_buf, 4, false);
     for(uint8_t j = 0; j < len; j++){
         for(uint8_t k = 0; k < CHARS_COLS_LENGTH; k++){
-            if(string[k] - 0x20 >= 0){
-                text_buff[k+1] = FONTS[string[k] - 0x20][k];
+            if(string[j] - 0x20 >= 0){
+                text_buff[k+1] = FONTS[string[j] - 0x20][k];
             }
             else{
                 text_buff[k+1] = 0x00;
