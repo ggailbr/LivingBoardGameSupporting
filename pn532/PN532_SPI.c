@@ -75,12 +75,12 @@ int8_t writeCommand(uint cs_gpio, uint8_t *header, uint8_t header_len, uint8_t *
         sleep_ms(1);
         timeout--;
         if(0 == timeout){
-            printf("Timeout waiting for ACK");
+            //printf("Timeout waiting for ACK");
             return -2;
         }
     }
     if(!readAckFrame(cs_gpio)){
-        printf("Invalid ACK\n");
+        //printf("Invalid ACK\n");
         return PN532_INVALID_ACK;
     }
     return 0;
@@ -148,7 +148,7 @@ int16_t readResponse(uint cs_gpio, uint8_t *buf, uint8_t len, uint16_t timeout){
         sleep_ms(1);
         timeout_attempts++;
         if(timeout > 0 && timeout_attempts > timeout){
-            printf("Timeout waiting for response\n");
+            //printf("Timeout waiting for response\n");
             return PN532_TIMEOUT;
         }
     }
@@ -165,7 +165,7 @@ int16_t readResponse(uint cs_gpio, uint8_t *buf, uint8_t len, uint16_t timeout){
         spi_read_blocking(SPI0, 0xFF,cmp_buf, 3);
         swap_bits(cmp_buf, 3);
         if(0 != memcmp(cmp_buf, message_start, 3)){
-            printf("Invalid Start\n");
+            //printf("Invalid Start\n");
             result = PN532_INVALID_FRAME;
             break; 
         }
@@ -174,7 +174,7 @@ int16_t readResponse(uint cs_gpio, uint8_t *buf, uint8_t len, uint16_t timeout){
         swap_bits(cmp_buf, 2);
         uint8_t length = cmp_buf[0];
         if((uint8_t)(cmp_buf[0] + cmp_buf[1]) != 0){
-            printf("Bad Length");
+            //printf("Bad Length");
             result = PN532_INVALID_FRAME;
             break;
         }
@@ -183,21 +183,21 @@ int16_t readResponse(uint cs_gpio, uint8_t *buf, uint8_t len, uint16_t timeout){
         spi_read_blocking(SPI0, 0xFF, cmp_buf, 2);
         swap_bits(cmp_buf, 2);
         if(PN532_PN532TOHOST != cmp_buf[0] || cmd != cmp_buf[1]){
-            printf("Bad command/return");
+            //printf("Bad command/return");
             result = PN532_INVALID_FRAME;
             break;
         }
         // Printing the rest of the message
         length -= 2;
-        // printf("Command %x Length %d\n :", cmd, length);
+        // //printf("Command %x Length %d\n :", cmd, length);
         // Checking if the provided buffer is large enough
         if(length > len){
             for(uint8_t i = 0; i < length; i++){
                 spi_read_blocking(SPI0, 0xFF, &excess_buf, 1);
                 swap_bits(&excess_buf, 1);
-                // printf("%02x ", excess_buf);
+                // //printf("%02x ", excess_buf);
             }
-            printf("\nNot enough space\n");
+            //printf("\nNot enough space\n");
             spi_read_blocking(SPI0, 0xFF, cmp_buf, 2);
             result = PN532_NO_SPACE;
             break;
@@ -208,13 +208,13 @@ int16_t readResponse(uint cs_gpio, uint8_t *buf, uint8_t len, uint16_t timeout){
             spi_read_blocking(SPI0, 0xFF, &(buf[i]), 1);
             swap_bits(&(buf[i]), 1);
             sum += buf[i];
-            // printf("%02x ", buf[i]);
+            // //printf("%02x ", buf[i]);
         }
         // Read Message Checksum
         spi_read_blocking(SPI0, 0xFF, &excess_buf, 1);
         swap_bits(&excess_buf, 1);
         if(0 != (uint8_t)(sum + excess_buf)){
-            printf("Checksum not correct\n");
+            //printf("Checksum not correct\n");
             result = PN532_INVALID_FRAME;
             break;
         }

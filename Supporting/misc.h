@@ -2,6 +2,7 @@
 #define MISC_H
 
 #include "pico/stdlib.h"
+#include "pico/stdio.h"
 
 /**
  * \brief swaps bits from lsb->msb or msb->lsb on a per byte basis
@@ -12,5 +13,5 @@
  * 
 */
 void swap_bits(uint8_t *buf, size_t size);
-
+void send_bytes(uint8_t * buf, uint8_t len);
 #endif

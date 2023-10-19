@@ -14,7 +14,7 @@ bool readPassiveTargetID(uint cs_gpio, uint8_t cardbaud, uint8_t *uid, uint8_t *
     pn532_packetbuffer[1] = 1; // Max cards 1
     pn532_packetbuffer[2] = cardbaud;
     if(writeCommand(cs_gpio, pn532_packetbuffer, 3, NULL, 0)){
-        printf("Read Command Failed\n");
+        //printf("Read Command Failed\n");
         return false;
     }
     if(readResponse(cs_gpio, pn532_packetbuffer, 64, timeout) < 0){
@@ -29,9 +29,9 @@ bool readPassiveTargetID(uint cs_gpio, uint8_t cardbaud, uint8_t *uid, uint8_t *
     sens_res <<= 8;
     sens_res |= pn532_packetbuffer[3];
 
-    //printf("ATQA: 0x%04x ", sens_res);
-    //printf("SAK: 0x%02x", pn532_packetbuffer[4]);
-    //printf("\n");
+    ////printf("ATQA: 0x%04x ", sens_res);
+    ////printf("SAK: 0x%02x", pn532_packetbuffer[4]);
+    ////printf("\n");
 
     /* Card appears to be Mifare Classic */
     *uid_len = pn532_packetbuffer[5];
@@ -50,11 +50,11 @@ bool SAMconfig(uint cs_gpio){
     pn532_packetbuffer[3] = 0x01; // USE IRQ
 
     if(writeCommand(cs_gpio, pn532_packetbuffer, 4, NULL, 0)){
-        printf("Failed write");
+        //printf("Failed write");
         return false;
     }
     int16_t result = readResponse(cs_gpio, pn532_packetbuffer, 64, 1000);
-    printf("Result of read: %d", result);
+    //printf("Result of read: %d", result);
     return (0 <= result);
 }
 /**
@@ -75,7 +75,7 @@ uint8_t ntag215_Read4Page(uint cs_gpio, uint8_t page, uint8_t *buffer){
     pn532_packetbuffer[2] = MIFARE_CMD_READ; /* Mifare Read command = 0x30 */
     pn532_packetbuffer[3] = page; /* Page Number (0..63 in most cases) */
     if(writeCommand(cs_gpio, pn532_packetbuffer, 4, NULL, 0)){
-        printf("ReadPage Command Failed\n");
+        //printf("ReadPage Command Failed\n");
         return false;
     }
     int16_t result = readResponse(cs_gpio, pn532_packetbuffer, 64, 1000);
@@ -105,7 +105,7 @@ uint8_t ntag215_ReadPage(uint cs_gpio, uint8_t page, uint8_t *buffer){
     pn532_packetbuffer[2] = MIFARE_CMD_READ; /* Mifare Read command = 0x30 */
     pn532_packetbuffer[3] = page; /* Page Number (0..63 in most cases) */
     if(writeCommand(cs_gpio, pn532_packetbuffer, 4, NULL, 0)){
-        printf("ReadPage Command Failed\n");
+        //printf("ReadPage Command Failed\n");
         return false;
     }
     int16_t result = readResponse(cs_gpio, pn532_packetbuffer, 64, 1000);
@@ -129,7 +129,7 @@ uint8_t ntag215_WritePage(uint cs_gpio, uint8_t page, uint8_t *buffer){
     pn532_packetbuffer[2] = MIFARE_CMD_WRITE_ULTRALIGHT; /* Mifare UL Write cmd = 0xA2 */
     pn532_packetbuffer[3] = page; /* Page Number (0..63 in most cases) */
     if(writeCommand(cs_gpio, pn532_packetbuffer, 4, buffer, 4)){
-        printf("WritePage Command Failed\n");
+        //printf("WritePage Command Failed\n");
         return false;
     }
     return (0 <= readResponse(cs_gpio, pn532_packetbuffer, 64, 1000));
