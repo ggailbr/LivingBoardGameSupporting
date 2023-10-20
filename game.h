@@ -3,13 +3,24 @@
 
 #include "pico/stdlib.h"
 
+// Token Types
 #define PLAYER  0
 #define EQUIP   1
 
-#define MUTANT  0
-#define ROBOT   1
+// Player Classes
+#define MUTANT  4
+#define ROBOT   3
+#define DOG   0
+#define STRAW   5
+#define GOBLIN   2
+#define SCIENTIST   1
 
-#define ARMOR 0
+// Equipment Classes
+#define SPECIAL 0
+#define HELMET 1
+#define FIREARM 2
+#define WEAPON 3
+#define ARMOR 4
 
 typedef struct{
     uint8_t type : 1;

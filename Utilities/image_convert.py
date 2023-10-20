@@ -18,7 +18,7 @@ if __name__ == '__main__':
     parser.add_argument('--image_file', '-f', type=str, help='Path to image file to convert')
     parser.add_argument('--c_file_only', '-c', action='store_true', help='Only Generate c and h file of images')
     args = parser.parse_args()
-    if not args.c_file_only:
+    if not(args.c_file_only):
         image = Image.open(args.image_file)
         if image.width > 40:
             image = preprocessing(image)
@@ -62,12 +62,12 @@ if __name__ == '__main__':
         for key in images.keys():
             image_header.write("extern uint8_t *images_"+key+"[];\n")
         image_header.writelines(["#endif\n"])
-    
-    with open("../../Images/images.c", 'w') as image_c:
-        image_c.write('#include \"images.h\"\n')
-        for key in images.keys():
-            image_c.write("uint8_t *images_"+key+"[] = {\n")
-            for ind,image in enumerate(images[key]):
-                image_c.write("\t"+image+",\n")
-                print(f"Image {image} assigned index {ind} in Array images_{key}")
-            image_c.write('};\n')
+    with open("../README.md",'w') as read_me:
+        with open("../../Images/images.c", 'w') as image_c:
+            image_c.write('#include \"images.h\"\n')
+            for key in images.keys():
+                image_c.write("uint8_t *images_"+key+"[] = {\n")
+                for ind,image in enumerate(images[key]):
+                    image_c.write("\t"+image+",\n")
+                    read_me.write(f"{image}\t\t :  {key}[{ind}]\n")
+                image_c.write('};\n')

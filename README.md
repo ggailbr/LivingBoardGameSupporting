@@ -1,0 +1,7 @@
+vault_boy		 :  320[0]
+yee		 :  320[1]
+special		 :  24[0]
+helmet		 :  24[1]
+firearm		 :  24[2]
+weapon		 :  24[3]
+armor		 :  24[4]
