@@ -1,4 +1,8 @@
 #include "game.h"
+#include "pico/stdio.h"
+#include "pico/stdlib.h"
+#include <string.h>
+#include <stdio.h>
 
 class_entry classes[NUM_CLASSES] = {
     [DOG] = {
@@ -86,3 +90,28 @@ class_entry classes[NUM_CLASSES] = {
         }
     }
 };
+
+
+void fill_stats(uint8_t *text_buff, stat_block stats){
+    sprintf(text_buff, "SPEED:%-+1d VIEW:%-+1dHEALTH:%-+7dATTACK:%-+7dARMOR:%-+8dGOLD:%-+9dSPECIAL:0x%-+06x", stats.speed, stats.view, stats.health, stats.attack, stats.armor, stats.gold, stats.special);
+}
+
+// Will need to modify
+void add_stats(stat_block *end_stats, stat_block *changing_stats){
+    end_stats->view += changing_stats->view;
+    end_stats->speed += changing_stats->speed;
+    end_stats->health += changing_stats->health;
+    end_stats->gold += changing_stats->gold;
+    end_stats->armor += changing_stats->armor;
+    end_stats->attack += changing_stats->attack;
+}
+
+// Will need to modify
+void sub_stats(stat_block *end_stats, stat_block *changing_stats){
+    end_stats->view -= changing_stats->view;
+    end_stats->speed -= changing_stats->speed;
+    end_stats->health -= changing_stats->health;
+    end_stats->gold -= changing_stats->gold;
+    end_stats->armor -= changing_stats->armor;
+    end_stats->attack -= changing_stats->attack;
+}

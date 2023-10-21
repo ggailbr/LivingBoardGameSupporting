@@ -2,6 +2,8 @@
 #define __GAME_H__
 
 #include "pico/stdlib.h"
+#include "pico/stdio.h"
+#include <string.h>
 
 // Token Types
 #define PLAYER  0
@@ -35,14 +37,14 @@ typedef struct{
 typedef union{
     uint8_t stat[16];
     struct{
-        uint8_t speed : 4;
-        uint8_t view : 4;
-        uint8_t health;
-        uint16_t gold;
-        uint8_t armor;
-        uint8_t attack;
+        int8_t speed;
+        int8_t view;
+        int8_t health;
+        int16_t gold;
+        int8_t armor;
+        int8_t attack;
         uint8_t special;
-        uint8_t reserved[9];
+        int8_t reserved[8];
     };
 }stat_block;
 
@@ -72,5 +74,7 @@ typedef struct{
 } class_entry;
 
 extern class_entry classes[NUM_CLASSES];
-
+void fill_stats(uint8_t *text_buff, stat_block stats);
+void add_stats(stat_block *end_stats, stat_block *changing_stats);
+void sub_stats(stat_block *end_stats, stat_block *changing_stats);
 #endif
