@@ -21,7 +21,7 @@ class_entry classes[NUM_CLASSES] = {
     },
     [SCIENTIST] = {
         .title = "-SCIENCE MAN--",
-        .body = "What wonders await in the fallout. What new creatures are there to be discoverd.",
+        .body = "What wonders await in the fallout? What new creatures are there to be discoverd?",
         .portrait = SCIENTIST,
         .stats = {
             .health = 5,
@@ -76,7 +76,7 @@ class_entry classes[NUM_CLASSES] = {
         }
     },
     [STRAW] = {
-        .title = "--SCARECROW--",
+        .title = "--SCARECROW-- ",
         .body = "Through the power of friendship (and radiation), the lovable scarecrow was brought to life.",
         .portrait = STRAW,
         .stats = {
@@ -93,7 +93,7 @@ class_entry classes[NUM_CLASSES] = {
 
 
 void fill_stats(uint8_t *text_buff, stat_block stats){
-    sprintf(text_buff, "SPEED:%-+1d VIEW:%-+1dHEALTH:%-+7dATTACK:%-+7dARMOR:%-+8dGOLD:%-+9dSPECIAL:0x%-+06x", stats.speed, stats.view, stats.health, stats.attack, stats.armor, stats.gold, stats.special);
+    sprintf(text_buff, "SPEED:%-1d VIEW:%-1dHEALTH:%-+7dATTACK:%-+7dARMOR:%-+8dGOLD:%-+9dSPECIAL:0x%-+06x", stats.speed, stats.view, stats.health, stats.attack, stats.armor, stats.gold, stats.special);
 }
 
 // Will need to modify
