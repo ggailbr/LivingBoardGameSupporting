@@ -101,7 +101,7 @@ void add_stats(stat_block *end_stats, stat_block *changing_stats){
     end_stats->view += changing_stats->view;
     end_stats->speed += changing_stats->speed;
     end_stats->health += changing_stats->health;
-    end_stats->gold += changing_stats->gold;
+    //end_stats->gold += changing_stats->gold;
     end_stats->armor += changing_stats->armor;
     end_stats->attack += changing_stats->attack;
 }
@@ -111,7 +111,7 @@ void sub_stats(stat_block *end_stats, stat_block *changing_stats){
     end_stats->view -= changing_stats->view;
     end_stats->speed -= changing_stats->speed;
     end_stats->health -= changing_stats->health;
-    end_stats->gold -= changing_stats->gold;
+    //end_stats->gold -= changing_stats->gold;
     end_stats->armor -= changing_stats->armor;
     end_stats->attack -= changing_stats->attack;
 }
