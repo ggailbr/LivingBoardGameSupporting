@@ -4,7 +4,8 @@
 #include "pico/stdlib.h"
 #include "hardware/pwm.h"
 
-#define MOTOR_GPIO 22U
+#define MOTOR5_GPIO 22U
+#define MOTOR6_GPIO 16U
 
 void motor_init(uint gpio);
 
