@@ -19,14 +19,18 @@ void motor_init(uint gpio){
 }
 
 void turn_on_motor(uint gpio){
+    slice_num = pwm_gpio_to_slice_num(gpio);
     pwm_set_enabled(slice_num, true);
 }
 
 void turn_off_motor(uint gpio){
+    slice_num = pwm_gpio_to_slice_num(gpio);
     pwm_set_enabled(slice_num, false);
 }
 
 
 void set_motor_angle(uint gpio, uint8_t angle){
-    pwm_set_chan_level(slice_num, chan, 0xC35+(0xC35*angle/(0xff)));
+    slice_num = pwm_gpio_to_slice_num(gpio);
+    chan =  pwm_gpio_to_channel(gpio);
+    pwm_set_chan_level(slice_num, chan, (0xC35/2)+(0xC35*2*angle/(0xff)));
 }
