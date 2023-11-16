@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 class_entry classes[NUM_CLASSES] = {
+    [0] = {0},
     [DOG] = {
         .title = "--MIGHTY DOG--",
         .body = " Once a loyal companion, he now scoures the wastelands to resurect his owner.",

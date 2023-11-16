@@ -10,20 +10,20 @@
 #define EQUIP   1
 
 // Player Classes
-#define MUTANT  4
-#define ROBOT   3
-#define DOG   0
-#define STRAW   5
-#define GOBLIN   2
-#define SCIENTIST   1
-#define NUM_CLASSES 6
+#define MUTANT  5
+#define ROBOT   4
+#define DOG   1
+#define STRAW   6
+#define GOBLIN   3
+#define SCIENTIST   2
+#define NUM_CLASSES 6+1
 
 // Equipment Classes
-#define SPECIAL 0
-#define HELMET 1
-#define FIREARM 2
-#define WEAPON 3
-#define ARMOR 4
+#define SPECIAL 1
+#define HELMET 2
+#define FIREARM 3
+#define WEAPON 4
+#define ARMOR 5
 
 typedef struct{
     uint8_t type : 1;
