@@ -66,8 +66,11 @@ if __name__ == '__main__':
         with open("../../Images/images.c", 'w') as image_c:
             image_c.write('#include \"images.h\"\n')
             for key in images.keys():
-                image_c.write("uint8_t *images_"+key+"[] = {\n")
+                if(key == "240"):
+                    image_c.write("uint8_t *images_"+key+"[] = { \n NULL,\n")
+                else:
+                    image_c.write("uint8_t *images_"+key+"[] = {\n")
                 for ind,image in enumerate(images[key]):
                     image_c.write("\t"+image+",\n")
-                    read_me.write(f"{image}\t\t :  {key}[{ind}]\n")
+                    read_me.write(f"{image}\t\t :  {key}[{ind+1}]\n")
                 image_c.write('};\n')

@@ -16,6 +16,7 @@
 #define STRAW   6
 #define GOBLIN   3
 #define SCIENTIST   2
+#define STARTING_CLASS DOG
 #define NUM_CLASSES 6+1
 
 // Equipment Classes
