@@ -12,3 +12,9 @@ void swap_bits(uint8_t *buf, size_t size){
         buf[i] = ((buf[i] & 0b10101010) >> 1) | ((buf[i] & 0b01010101) << 1);
     }
 }
+
+void send_bytes(uint8_t * buf, uint8_t len){
+    for(int i = 0; i < len; i++){
+        putchar_raw(buf[i]);
+    }
+}

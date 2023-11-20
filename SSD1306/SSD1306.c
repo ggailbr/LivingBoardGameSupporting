@@ -55,6 +55,11 @@ uint8_t write_text(i2c_inst_t *i2c){
     cmd_buf[2] = 0x00;
     cmd_buf[3] = 0x7F;
     i2c_write_blocking(i2c, SSD1306_ADDR, cmd_buf, 4, false);
+    // Set from PAGE0-7
+    cmd_buf[1] = 0x22;
+    cmd_buf[2] = 0x00;
+    cmd_buf[3] = 0x07;
+    i2c_write_blocking(i2c, SSD1306_ADDR, cmd_buf, 4, false);
     for(uint8_t i = 0; i < 8; i++){
         //Setting the Page to i
         cmd_buf[1] = 0xB0 | i;

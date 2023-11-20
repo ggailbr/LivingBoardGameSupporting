@@ -1,0 +1,6 @@
+dog		 :  240[1]
+austin		 :  240[2]
+gagea		 :  240[3]
+robot		 :  240[4]
+mutant		 :  240[5]
+strawman		 :  240[6]
